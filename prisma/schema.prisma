@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("Staff") // Admin, Staff, Customer
+  bookings  Booking[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Brand {
+  id    String @id @default(uuid())
+  name  String @unique
+  cars  Car[]
+}
+
+model Car {
+  id                 String    @id @default(uuid())
+  brandId            String
+  brand              Brand     @relation(fields: [brandId], references: [id])
+  model              String
+  seats              Int
+  registrationNumber String    @unique
+  dailyRate          Float
+  status             String    @default("Available") // Available, Maintenance, Rented
+  imageUrl           String?
+  bookings           Booking[]
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Customer {
+  id             String    @id @default(uuid())
+  name           String
+  phone          String
+  address        String
+  identityNumber String    @unique // KTP
+  bookings       Booking[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Route {
+  id          String    @id @default(uuid())
+  origin      String
+  destination String
+  basePrice   Float
+  bookings    Booking[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model PaymentType {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  bookings Booking[]
+}
+
+model Booking {
+  id            String      @id @default(uuid())
+  customerId    String
+  customer      Customer    @relation(fields: [customerId], references: [id])
+  carId         String
+  car           Car         @relation(fields: [carId], references: [id])
+  routeId       String
+  route         Route       @relation(fields: [routeId], references: [id])
+  paymentTypeId String
+  paymentType   PaymentType @relation(fields: [paymentTypeId], references: [id])
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+  startDate     DateTime
+  endDate       DateTime
+  totalAmount   Float
+  status        String      @default("Pending") // Pending, Active, Completed, Cancelled
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}

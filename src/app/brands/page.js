@@ -1,0 +1,13 @@
+import BrandPage from "@/pages/BrandPage";
+import { getBrands } from "@/lib/actions/brandActions";
+
+export const metadata = {
+  title: "Manage Brands | Rental Mobil",
+  description: "Manage car brands for the rental system.",
+};
+
+export default async function Page() {
+  const brands = await getBrands();
+  
+  return <BrandPage initialBrands={brands} />;
+}
