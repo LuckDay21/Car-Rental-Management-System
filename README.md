@@ -1,4 +1,4 @@
-# Rental Mobil Management System
+# Car Rental Management System
 
 A modern, high-performance Car Rental Management System built with Next.js 14, Tailwind CSS, and Prisma.
 
