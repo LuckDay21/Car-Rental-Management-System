@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Car, LayoutDashboard, Database, ClipboardList, Users, MapPin } from "lucide-react";
+import {
+  Car,
+  LayoutDashboard,
+  Database,
+  ClipboardList,
+  Users,
+  MapPin,
+} from "lucide-react";
 import { clsx } from "clsx";
 
 const navItems = [
@@ -23,7 +30,9 @@ export default function Navbar() {
         <div className="bg-blue-600 p-1.5 rounded-lg text-white">
           <Car size={24} />
         </div>
-        <span>Rental<span className="text-blue-500">Mobil</span></span>
+        <span>
+          Rental<span className="text-blue-500">Mobil</span>
+        </span>
       </div>
 
       <div className="hidden md:flex items-center gap-1">
@@ -35,7 +44,7 @@ export default function Navbar() {
               "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 flex items-center gap-2",
               pathname === item.href
                 ? "bg-blue-600/10 text-blue-500"
-                : "hover:bg-white/5 opacity-70 hover:opacity-100"
+                : "hover:bg-white/5 opacity-70 hover:opacity-100",
             )}
           >
             <item.icon size={18} />
@@ -45,7 +54,7 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 cursor-pointer" />
+        <div className="h-8 w-8 rounded-full bg-linear-to-tr from-blue-600 to-purple-600 cursor-pointer" />
       </div>
     </nav>
   );

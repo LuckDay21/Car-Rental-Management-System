@@ -20,20 +20,25 @@ export default function RouteTable({ routes, onEdit, onDelete, isLoading }) {
   };
 
   return (
-    <div className="glass-card overflow-hidden !p-0">
+    <div className="glass-card overflow-hidden p-0!">
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead className="bg-white/5 border-b border-white/10 text-xs uppercase tracking-wider opacity-60">
             <tr>
               <th className="px-6 py-4 font-medium">Route Path</th>
-              <th className="px-6 py-4 font-medium text-center">Distance Type</th>
+              <th className="px-6 py-4 font-medium text-center">
+                Distance Type
+              </th>
               <th className="px-6 py-4 font-medium">Base Price</th>
               <th className="px-6 py-4 font-medium text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
             {routes.map((route) => (
-              <tr key={route.id} className="group hover:bg-white/5 transition-colors">
+              <tr
+                key={route.id}
+                className="group hover:bg-white/5 transition-colors"
+              >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="flex flex-col items-center gap-1 opacity-50">
@@ -73,7 +78,11 @@ export default function RouteTable({ routes, onEdit, onDelete, isLoading }) {
                     </button>
                     <button
                       onClick={() => {
-                        if (confirm(`Delete route ${route.origin} - ${route.destination}?`)) {
+                        if (
+                          confirm(
+                            `Delete route ${route.origin} - ${route.destination}?`,
+                          )
+                        ) {
                           onDelete(route.id);
                         }
                       }}
