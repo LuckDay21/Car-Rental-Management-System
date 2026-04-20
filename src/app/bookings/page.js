@@ -6,7 +6,7 @@ import { getRoutes } from "@/lib/actions/routeActions";
 import { getPaymentTypes } from "@/lib/actions/paymentTypeActions";
 
 export const metadata = {
-  title: "Bookings | Rental Mobil",
+  title: "Bookings | Car Rental",
   description: "Manage car rental bookings.",
 };
 
@@ -18,13 +18,13 @@ export default async function Page() {
     getRoutes(),
     getPaymentTypes(),
   ]);
-  
+
   const relatedData = {
     customers,
     cars,
     routes,
-    paymentTypes
+    paymentTypes,
   };
-  
+
   return <BookingPage initialData={bookings} relatedData={relatedData} />;
 }
