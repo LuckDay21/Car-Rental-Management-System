@@ -16,7 +16,7 @@ export function useCars(initialCars = []) {
       // Re-fetch or manually update local state. For simplicity, manually update.
       // Note: In a real app we'd probably re-fetch to get the populated brand object.
       // For now, let's just assume we need to refresh the page or something.
-      window.location.reload(); 
+      window.location.reload();
     } else {
       setError(result.error);
     }

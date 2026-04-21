@@ -35,18 +35,13 @@ export default function CarTable({ cars, onEdit, onDelete, isLoading }) {
           </thead>
           <tbody className="divide-y divide-white/5">
             {cars.map((car) => (
-              <tr
-                key={car.id}
-                className="group hover:bg-white/5 transition-colors"
-              >
+              <tr key={car.id} className="group hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4">
                   <div className="font-bold flex items-center gap-1">
                     <span className="text-blue-400">{car.brand.name}</span>
                     <span>{car.model}</span>
                   </div>
-                  <div className="text-xs opacity-50 font-mono mt-1">
-                    {car.registrationNumber}
-                  </div>
+                  <div className="text-xs opacity-50 font-mono mt-1">{car.registrationNumber}</div>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2 opacity-70">
@@ -63,10 +58,8 @@ export default function CarTable({ cars, onEdit, onDelete, isLoading }) {
                   <span
                     className={clsx(
                       "px-3 py-1 rounded-full text-xs font-bold",
-                      car.status === "Available" &&
-                        "bg-emerald-500/10 text-emerald-400",
-                      car.status === "Maintenance" &&
-                        "bg-amber-500/10 text-amber-400",
+                      car.status === "Available" && "bg-emerald-500/10 text-emerald-400",
+                      car.status === "Maintenance" && "bg-amber-500/10 text-amber-400",
                       car.status === "Rented" && "bg-blue-500/10 text-blue-400",
                     )}
                   >

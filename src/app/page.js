@@ -15,8 +15,8 @@ export default async function Page() {
         customer: true,
         car: { include: { brand: true } },
         route: true,
-      }
-    })
+      },
+    }),
   ]);
 
   const stats = [

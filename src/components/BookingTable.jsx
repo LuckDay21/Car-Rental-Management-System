@@ -1,23 +1,10 @@
 "use client";
 
-import {
-  CheckCircle,
-  XCircle,
-  Clock,
-  Trash2,
-  MapPin,
-  Calendar,
-  Tag,
-} from "lucide-react";
+import { CheckCircle, XCircle, Clock, Trash2, MapPin, Calendar, Tag } from "lucide-react";
 import { format } from "date-fns";
 import { clsx } from "clsx";
 
-export default function BookingTable({
-  bookings,
-  onUpdateStatus,
-  onDelete,
-  isLoading,
-}) {
+export default function BookingTable({ bookings, onUpdateStatus, onDelete, isLoading }) {
   if (bookings.length === 0) {
     return (
       <div className="glass-card text-center py-12 opacity-50">
@@ -64,22 +51,15 @@ export default function BookingTable({
           </thead>
           <tbody className="divide-y divide-white/5">
             {bookings.map((booking) => (
-              <tr
-                key={booking.id}
-                className="group hover:bg-white/5 transition-colors"
-              >
+              <tr key={booking.id} className="group hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4">
-                  <div className="font-bold text-lg">
-                    {booking.customer.name}
-                  </div>
+                  <div className="font-bold text-lg">{booking.customer.name}</div>
                   <div className="flex items-center gap-2 text-xs opacity-60 mt-1">
                     <Tag size={12} className="text-blue-400" />
                     <span>
                       {booking.car.brand.name} {booking.car.model}
                     </span>
-                    <span className="font-mono">
-                      ({booking.car.registrationNumber})
-                    </span>
+                    <span className="font-mono">({booking.car.registrationNumber})</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
@@ -91,13 +71,9 @@ export default function BookingTable({
                   </div>
                   <div className="flex items-center gap-2 text-xs opacity-50 mt-1">
                     <Calendar size={12} />
-                    <span>
-                      {format(new Date(booking.startDate), "MMM d, yyyy")}
-                    </span>
+                    <span>{format(new Date(booking.startDate), "MMM d, yyyy")}</span>
                     <span>-</span>
-                    <span>
-                      {format(new Date(booking.endDate), "MMM d, yyyy")}
-                    </span>
+                    <span>{format(new Date(booking.endDate), "MMM d, yyyy")}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
@@ -137,9 +113,7 @@ export default function BookingTable({
                           Approve
                         </button>
                         <button
-                          onClick={() =>
-                            onUpdateStatus(booking.id, "Cancelled")
-                          }
+                          onClick={() => onUpdateStatus(booking.id, "Cancelled")}
                           className="px-3 py-1 text-xs font-bold bg-red-600/10 text-red-500 hover:bg-red-600/20 rounded-lg transition-all"
                         >
                           Cancel

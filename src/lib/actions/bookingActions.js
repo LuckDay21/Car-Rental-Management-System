@@ -35,7 +35,7 @@ export async function createBooking(data) {
         status: "Pending",
       },
     });
-    
+
     revalidatePath("/bookings");
     revalidatePath("/");
     return { success: true, booking };
@@ -52,14 +52,14 @@ export async function updateBookingStatus(id, status) {
       where: { id },
       data: { status },
     });
-    
+
     if (status === "Active") {
       await prisma.car.update({
         where: { id: booking.carId },
         data: { status: "Rented" },
       });
     } else if (status === "Completed" || status === "Cancelled") {
-       await prisma.car.update({
+      await prisma.car.update({
         where: { id: booking.carId },
         data: { status: "Available" },
       });
@@ -89,4 +89,3 @@ export async function deleteBooking(id) {
     return { success: false, error: error.message };
   }
 }
-

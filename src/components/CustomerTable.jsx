@@ -2,12 +2,7 @@
 
 import { Edit2, Trash2, Phone, MapPin, CreditCard } from "lucide-react";
 
-export default function CustomerTable({
-  customers,
-  onEdit,
-  onDelete,
-  isLoading,
-}) {
+export default function CustomerTable({ customers, onEdit, onDelete, isLoading }) {
   if (customers.length === 0) {
     return (
       <div className="glass-card text-center py-12 opacity-50">
@@ -30,17 +25,12 @@ export default function CustomerTable({
           </thead>
           <tbody className="divide-y divide-white/5">
             {customers.map((customer) => (
-              <tr
-                key={customer.id}
-                className="group hover:bg-white/5 transition-colors"
-              >
+              <tr key={customer.id} className="group hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4">
                   <div className="font-bold text-lg">{customer.name}</div>
                   <div className="flex items-center gap-2 text-xs opacity-50 mt-1">
                     <MapPin size={12} />
-                    <span className="truncate max-w-50">
-                      {customer.address}
-                    </span>
+                    <span className="truncate max-w-50">{customer.address}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">

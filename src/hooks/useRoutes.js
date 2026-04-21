@@ -27,7 +27,9 @@ export function useRoutes(initialRoutes = []) {
     const result = await updateRoute(id, data);
     if (result.success) {
       setRoutes((prev) =>
-        prev.map((r) => (r.id === id ? result.route : r)).sort((a, b) => a.origin.localeCompare(b.origin))
+        prev
+          .map((r) => (r.id === id ? result.route : r))
+          .sort((a, b) => a.origin.localeCompare(b.origin)),
       );
     } else {
       setError(result.error);

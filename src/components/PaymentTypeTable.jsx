@@ -2,12 +2,7 @@
 
 import { Edit2, Trash2, Wallet } from "lucide-react";
 
-export default function PaymentTypeTable({
-  items,
-  onEdit,
-  onDelete,
-  isLoading,
-}) {
+export default function PaymentTypeTable({ items, onEdit, onDelete, isLoading }) {
   if (items.length === 0) {
     return (
       <div className="glass-card text-center py-12 opacity-50">
@@ -28,10 +23,7 @@ export default function PaymentTypeTable({
           </thead>
           <tbody className="divide-y divide-white/5">
             {items.map((item) => (
-              <tr
-                key={item.id}
-                className="group hover:bg-white/5 transition-colors"
-              >
+              <tr key={item.id} className="group hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4 flex items-center gap-3 font-medium text-lg">
                   <Wallet size={18} className="opacity-40" />
                   {item.name}

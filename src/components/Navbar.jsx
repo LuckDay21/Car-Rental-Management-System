@@ -2,14 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Car,
-  LayoutDashboard,
-  Database,
-  ClipboardList,
-  Users,
-  MapPin,
-} from "lucide-react";
+import { Car, LayoutDashboard, Database, ClipboardList, Users, MapPin } from "lucide-react";
 import { clsx } from "clsx";
 
 const navItems = [

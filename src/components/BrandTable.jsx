@@ -23,10 +23,7 @@ export default function BrandTable({ brands, onEdit, onDelete, isLoading }) {
           </thead>
           <tbody className="divide-y divide-white/5">
             {brands.map((brand) => (
-              <tr
-                key={brand.id}
-                className="group hover:bg-white/5 transition-colors"
-              >
+              <tr key={brand.id} className="group hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4 font-medium">{brand.name}</td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
@@ -40,11 +37,7 @@ export default function BrandTable({ brands, onEdit, onDelete, isLoading }) {
                     </button>
                     <button
                       onClick={() => {
-                        if (
-                          confirm(
-                            `Are you sure you want to delete ${brand.name}?`,
-                          )
-                        ) {
+                        if (confirm(`Are you sure you want to delete ${brand.name}?`)) {
                           onDelete(brand.id);
                         }
                       }}

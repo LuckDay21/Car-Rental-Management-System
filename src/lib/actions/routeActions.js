@@ -64,4 +64,3 @@ export async function deleteRoute(id) {
     return { success: false, error: "Cannot delete route if it is used in bookings." };
   }
 }
-

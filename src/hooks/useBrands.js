@@ -27,7 +27,9 @@ export function useBrands(initialBrands = []) {
     const result = await updateBrand(id, name);
     if (result.success) {
       setBrands((prev) =>
-        prev.map((b) => (b.id === id ? result.brand : b)).sort((a, b) => a.name.localeCompare(b.name))
+        prev
+          .map((b) => (b.id === id ? result.brand : b))
+          .sort((a, b) => a.name.localeCompare(b.name)),
       );
     } else {
       setError(result.error);

@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { createPaymentType, updatePaymentType, deletePaymentType } from "@/lib/actions/paymentTypeActions";
+import {
+  createPaymentType,
+  updatePaymentType,
+  deletePaymentType,
+} from "@/lib/actions/paymentTypeActions";
 
 export function usePaymentTypes(initialData = []) {
   const [paymentTypes, setPaymentTypes] = useState(initialData);
@@ -13,7 +17,9 @@ export function usePaymentTypes(initialData = []) {
     setError(null);
     const result = await createPaymentType(name);
     if (result.success) {
-      setPaymentTypes((prev) => [...prev, result.paymentType].sort((a, b) => a.name.localeCompare(b.name)));
+      setPaymentTypes((prev) =>
+        [...prev, result.paymentType].sort((a, b) => a.name.localeCompare(b.name)),
+      );
     } else {
       setError(result.error);
     }
@@ -27,7 +33,9 @@ export function usePaymentTypes(initialData = []) {
     const result = await updatePaymentType(id, name);
     if (result.success) {
       setPaymentTypes((prev) =>
-        prev.map((pt) => (pt.id === id ? result.paymentType : pt)).sort((a, b) => a.name.localeCompare(b.name))
+        prev
+          .map((pt) => (pt.id === id ? result.paymentType : pt))
+          .sort((a, b) => a.name.localeCompare(b.name)),
       );
     } else {
       setError(result.error);

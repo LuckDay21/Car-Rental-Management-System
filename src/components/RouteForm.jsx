@@ -5,26 +5,10 @@ import { Plus, Edit2, X, MapPin, Navigation, CreditCard } from "lucide-react";
 
 export default function RouteForm({ onSubmit, editingRoute, onCancel, isLoading }) {
   const [formData, setFormData] = useState({
-    origin: "",
-    destination: "",
-    basePrice: "",
+    origin: editingRoute?.origin || "",
+    destination: editingRoute?.destination || "",
+    basePrice: editingRoute?.basePrice?.toString() || "",
   });
-
-  useEffect(() => {
-    if (editingRoute) {
-      setFormData({
-        origin: editingRoute.origin,
-        destination: editingRoute.destination,
-        basePrice: editingRoute.basePrice.toString(),
-      });
-    } else {
-      setFormData({
-        origin: "",
-        destination: "",
-        basePrice: "",
-      });
-    }
-  }, [editingRoute]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +29,7 @@ export default function RouteForm({ onSubmit, editingRoute, onCancel, isLoading 
         {editingRoute ? <Edit2 size={20} /> : <Plus size={20} />}
         {editingRoute ? "Edit Route" : "Add New Route"}
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-medium opacity-70 flex items-center gap-2">
@@ -103,14 +87,14 @@ export default function RouteForm({ onSubmit, editingRoute, onCancel, isLoading 
             <X size={18} /> Cancel
           </button>
         )}
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="btn-primary"
-        >
+        <button type="submit" disabled={isLoading} className="btn-primary">
           {isLoading ? (
             <span className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white" />
-          ) : editingRoute ? "Update Route" : "Add Route"}
+          ) : editingRoute ? (
+            "Update Route"
+          ) : (
+            "Add Route"
+          )}
         </button>
       </div>
     </form>

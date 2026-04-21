@@ -6,15 +6,12 @@ import BookingTable from "@/components/BookingTable";
 import { useBookings } from "@/hooks/useBookings";
 import { AlertCircle, ClipboardList, Plus, X } from "lucide-react";
 
-export default function BookingPage({ initialData = [], relatedData = { customers: [], cars: [], routes: [], paymentTypes: [] } }) {
-  const {
-    bookings,
-    isLoading,
-    error,
-    handleAdd,
-    handleUpdateStatus,
-    handleDelete,
-  } = useBookings(initialData);
+export default function BookingPage({
+  initialData = [],
+  relatedData = { customers: [], cars: [], routes: [], paymentTypes: [] },
+}) {
+  const { bookings, isLoading, error, handleAdd, handleUpdateStatus, handleDelete } =
+    useBookings(initialData);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -30,10 +27,7 @@ export default function BookingPage({ initialData = [], relatedData = { customer
           <h1 className="text-4xl font-bold mb-2 tracking-tight">Rental Bookings</h1>
           <p className="opacity-60">Manage your active, pending, and completed rentals.</p>
         </div>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="btn-primary"
-        >
+        <button onClick={() => setShowForm(!showForm)} className="btn-primary">
           {showForm ? <X size={20} /> : <Plus size={20} />}
           {showForm ? "Cancel" : "New Booking"}
         </button>

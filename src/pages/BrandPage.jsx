@@ -7,14 +7,8 @@ import { useBrands } from "@/hooks/useBrands";
 import { AlertCircle } from "lucide-react";
 
 export default function BrandPage({ initialBrands = [] }) {
-  const {
-    brands,
-    isLoading,
-    error,
-    handleAddBrand,
-    handleUpdateBrand,
-    handleDeleteBrand,
-  } = useBrands(initialBrands);
+  const { brands, isLoading, error, handleAddBrand, handleUpdateBrand, handleDeleteBrand } =
+    useBrands(initialBrands);
 
   const [editingBrand, setEditingBrand] = useState(null);
 
@@ -42,6 +36,7 @@ export default function BrandPage({ initialBrands = [] }) {
       )}
 
       <BrandForm
+        key={editingBrand?.id || "new"}
         onSubmit={handleFormSubmit}
         editingBrand={editingBrand}
         onCancel={() => setEditingBrand(null)}

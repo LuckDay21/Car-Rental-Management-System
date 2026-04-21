@@ -7,32 +7,35 @@ import { differenceInDays, isAfter, parseISO, startOfDay } from "date-fns";
 export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
   const { customers, cars, routes, paymentTypes } = data;
 
-  const [formData, setFormData] = useState({
-    customerId: "",
-    carId: "",
-    routeId: "",
-    paymentTypeId: "",
-    startDate: new Date().toISOString().split("T")[0],
-    endDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
+  const [formData, setFormData] = useState(() => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    return {
+      customerId: "",
+      carId: "",
+      routeId: "",
+      paymentTypeId: "",
+      startDate: today.toISOString().split("T")[0],
+      endDate: tomorrow.toISOString().split("T")[0],
+    };
   });
 
-  const [totalAmount, setTotalAmount] = useState(0);
-
-  // Calculate price whenever selections or dates change
-  useEffect(() => {
+  // Calculate price whenever selections or dates change - Derived state to avoid extra renders
+  const totalAmount = useMemo(() => {
     const selectedCar = cars.find((c) => c.id === formData.carId);
     const selectedRoute = routes.find((r) => r.id === formData.routeId);
-    
+
     if (selectedCar && selectedRoute && formData.startDate && formData.endDate) {
       const start = parseISO(formData.startDate);
       const end = parseISO(formData.endDate);
-      
+
       const days = Math.max(1, differenceInDays(end, start));
-      const amount = selectedRoute.basePrice + (selectedCar.dailyRate * days);
-      setTotalAmount(amount);
-    } else {
-      setTotalAmount(0);
+      const amount = selectedRoute.basePrice + selectedCar.dailyRate * days;
+      return amount;
     }
+    return 0;
   }, [formData, cars, routes]);
 
   const handleSubmit = (e) => {
@@ -55,7 +58,7 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
   };
 
   const availableCars = useMemo(() => {
-    return cars.filter(c => c.status === "Available");
+    return cars.filter((c) => c.status === "Available");
   }, [cars]);
 
   return (
@@ -64,7 +67,7 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
         <Plus size={20} className="text-blue-500" />
         New Booking Request
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Customer Selection */}
         <div className="space-y-2">
@@ -78,9 +81,13 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
             className="input-glass bg-transparent"
             required
           >
-            <option value="" disabled className="bg-slate-900">Select Customer</option>
+            <option value="" disabled className="bg-slate-900">
+              Select Customer
+            </option>
             {customers.map((c) => (
-              <option key={c.id} value={c.id} className="bg-slate-900">{c.name}</option>
+              <option key={c.id} value={c.id} className="bg-slate-900">
+                {c.name}
+              </option>
             ))}
           </select>
         </div>
@@ -97,7 +104,9 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
             className="input-glass bg-transparent"
             required
           >
-            <option value="" disabled className="bg-slate-900">Select Car</option>
+            <option value="" disabled className="bg-slate-900">
+              Select Car
+            </option>
             {availableCars.map((c) => (
               <option key={c.id} value={c.id} className="bg-slate-900">
                 {c.brand.name} {c.model} ({c.seats} seats)
@@ -118,7 +127,9 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
             className="input-glass bg-transparent"
             required
           >
-            <option value="" disabled className="bg-slate-900">Select Route</option>
+            <option value="" disabled className="bg-slate-900">
+              Select Route
+            </option>
             {routes.map((r) => (
               <option key={r.id} value={r.id} className="bg-slate-900">
                 {r.origin} → {r.destination}
@@ -169,9 +180,13 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
             className="input-glass bg-transparent"
             required
           >
-            <option value="" disabled className="bg-slate-900">Select Method</option>
+            <option value="" disabled className="bg-slate-900">
+              Select Method
+            </option>
             {paymentTypes.map((pt) => (
-              <option key={pt.id} value={pt.id} className="bg-slate-900">{pt.name}</option>
+              <option key={pt.id} value={pt.id} className="bg-slate-900">
+                {pt.name}
+              </option>
             ))}
           </select>
         </div>
@@ -184,13 +199,15 @@ export default function BookingForm({ onSubmit, onCancel, isLoading, data }) {
             <Calculator size={24} />
           </div>
           <div>
-            <p className="text-sm opacity-60 uppercase tracking-widest font-bold">Estimated Total</p>
+            <p className="text-sm opacity-60 uppercase tracking-widest font-bold">
+              Estimated Total
+            </p>
             <p className="text-3xl font-black text-blue-400">
               {totalAmount > 0 ? formatCurrency(totalAmount) : "Select details..."}
             </p>
           </div>
         </div>
-        
+
         <div className="flex gap-3">
           <button
             type="submit"

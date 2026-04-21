@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 import { Plus, Edit2, X } from "lucide-react";
 
 export default function BrandForm({ onSubmit, editingBrand, onCancel, isLoading }) {
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (editingBrand) {
-      setName(editingBrand.name);
-    } else {
-      setName("");
-    }
-  }, [editingBrand]);
+  const [name, setName] = useState(editingBrand?.name || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,11 +31,7 @@ export default function BrandForm({ onSubmit, editingBrand, onCancel, isLoading 
           />
         </div>
         <div className="flex gap-2">
-          <button
-            type="submit"
-            disabled={isLoading || !name.trim()}
-            className="btn-primary"
-          >
+          <button type="submit" disabled={isLoading || !name.trim()} className="btn-primary">
             {isLoading ? (
               <span className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white" />
             ) : editingBrand ? (
@@ -56,7 +44,7 @@ export default function BrandForm({ onSubmit, editingBrand, onCancel, isLoading 
               </>
             )}
           </button>
-          
+
           {editingBrand && (
             <button
               type="button"

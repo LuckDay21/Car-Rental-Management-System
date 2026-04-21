@@ -7,14 +7,8 @@ import { useCars } from "@/hooks/useCars";
 import { AlertCircle, Car as CarIcon } from "lucide-react";
 
 export default function CarPage({ initialCars = [], brands = [] }) {
-  const {
-    cars,
-    isLoading,
-    error,
-    handleAddCar,
-    handleUpdateCar,
-    handleDeleteCar,
-  } = useCars(initialCars);
+  const { cars, isLoading, error, handleAddCar, handleUpdateCar, handleDeleteCar } =
+    useCars(initialCars);
 
   const [editingCar, setEditingCar] = useState(null);
 
@@ -48,8 +42,12 @@ export default function CarPage({ initialCars = [], brands = [] }) {
       {brands.length === 0 ? (
         <div className="glass-card text-center py-12 border-amber-500/20">
           <p className="text-amber-400 font-bold mb-2">No Brands Found</p>
-          <p className="opacity-60 mb-6">You need to add at least one brand before managing cars.</p>
-          <a href="/brands" className="btn-primary inline-flex">Go to Brands</a>
+          <p className="opacity-60 mb-6">
+            You need to add at least one brand before managing cars.
+          </p>
+          <a href="/brands" className="btn-primary inline-flex">
+            Go to Brands
+          </a>
         </div>
       ) : (
         <>
@@ -61,6 +59,7 @@ export default function CarPage({ initialCars = [], brands = [] }) {
           )}
 
           <CarForm
+            key={editingCar?.id || "new"}
             onSubmit={handleFormSubmit}
             editingCar={editingCar}
             onCancel={() => setEditingCar(null)}

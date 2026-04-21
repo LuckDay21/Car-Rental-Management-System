@@ -7,14 +7,8 @@ import { useRoutes } from "@/hooks/useRoutes";
 import { AlertCircle, MapPin } from "lucide-react";
 
 export default function RoutePage({ initialRoutes = [] }) {
-  const {
-    routes,
-    isLoading,
-    error,
-    handleAddRoute,
-    handleUpdateRoute,
-    handleDeleteRoute,
-  } = useRoutes(initialRoutes);
+  const { routes, isLoading, error, handleAddRoute, handleUpdateRoute, handleDeleteRoute } =
+    useRoutes(initialRoutes);
 
   const [editingRoute, setEditingRoute] = useState(null);
 
@@ -53,6 +47,7 @@ export default function RoutePage({ initialRoutes = [] }) {
       )}
 
       <RouteForm
+        key={editingRoute?.id || "new"}
         onSubmit={handleFormSubmit}
         editingRoute={editingRoute}
         onCancel={() => setEditingRoute(null)}

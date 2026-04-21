@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  Car,
-  Database,
-  MapPin,
-  ClipboardList,
-  CheckCircle,
-  Clock,
-} from "lucide-react";
+import { ArrowRight, Car, Database, MapPin, ClipboardList, CheckCircle, Clock } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { clsx } from "clsx";
@@ -29,7 +21,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
           Welcome Back, Admin
         </h1>
         <p className="opacity-60 mt-2 text-lg">
-          Here's what's happening with your fleet today.
+          Here&apos;s what&apos;s happening with your fleet today.
         </p>
       </header>
 
@@ -85,8 +77,8 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
                       <div>
                         <p className="font-bold">{booking.customer.name}</p>
                         <p className="text-xs opacity-50">
-                          {booking.car.brand.name} {booking.car.model} •{" "}
-                          {booking.route.origin} → {booking.route.destination}
+                          {booking.car.brand.name} {booking.car.model} • {booking.route.origin} →{" "}
+                          {booking.route.destination}
                         </p>
                       </div>
                     </div>
@@ -108,8 +100,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
                 </div>
                 <h3 className="text-xl font-bold mb-2">No Recent Activity</h3>
                 <p className="opacity-50 max-w-xs">
-                  Bookings and system events will appear here once they start
-                  coming in.
+                  Bookings and system events will appear here once they start coming in.
                 </p>
               </div>
             )}
@@ -119,10 +110,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
         <section className="space-y-6">
           <h2 className="text-2xl font-bold">Quick Actions</h2>
           <div className="flex flex-col gap-4">
-            <Link
-              href="/cars"
-              className="glass-card flex items-center justify-between group"
-            >
+            <Link href="/cars" className="glass-card flex items-center justify-between group">
               <div className="flex items-center gap-3">
                 <Car className="text-blue-500" />
                 <span>Manage Fleet</span>
@@ -130,10 +118,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
               <ArrowRight className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
             </Link>
 
-            <Link
-              href="/brands"
-              className="glass-card flex items-center justify-between group"
-            >
+            <Link href="/brands" className="glass-card flex items-center justify-between group">
               <div className="flex items-center gap-3">
                 <Database className="text-purple-500" />
                 <span>Master Brands</span>
@@ -141,10 +126,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
               <ArrowRight className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
             </Link>
 
-            <Link
-              href="/routes"
-              className="glass-card flex items-center justify-between group"
-            >
+            <Link href="/routes" className="glass-card flex items-center justify-between group">
               <div className="flex items-center gap-3">
                 <MapPin className="text-emerald-500" />
                 <span>Manage Routes</span>
@@ -152,10 +134,7 @@ export default function DashboardPage({ stats = [], recentBookings = [] }) {
               <ArrowRight className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
             </Link>
 
-            <Link
-              href="/bookings"
-              className="glass-card flex items-center justify-between group"
-            >
+            <Link href="/bookings" className="glass-card flex items-center justify-between group">
               <div className="flex items-center gap-3">
                 <ClipboardList className="text-amber-500" />
                 <span>Bookings</span>

@@ -66,4 +66,3 @@ export async function deleteCustomer(id) {
     return { success: false, error: "Cannot delete customer if they have bookings." };
   }
 }
-

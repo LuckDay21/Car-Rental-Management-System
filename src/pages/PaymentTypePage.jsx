@@ -7,14 +7,8 @@ import { usePaymentTypes } from "@/hooks/usePaymentTypes";
 import { AlertCircle, Wallet } from "lucide-react";
 
 export default function PaymentTypePage({ initialData = [] }) {
-  const {
-    paymentTypes,
-    isLoading,
-    error,
-    handleAdd,
-    handleUpdate,
-    handleDelete,
-  } = usePaymentTypes(initialData);
+  const { paymentTypes, isLoading, error, handleAdd, handleUpdate, handleDelete } =
+    usePaymentTypes(initialData);
 
   const [editingType, setEditingType] = useState(null);
 
@@ -47,6 +41,7 @@ export default function PaymentTypePage({ initialData = [] }) {
       )}
 
       <PaymentTypeForm
+        key={editingType?.id || "new"}
         onSubmit={handleFormSubmit}
         editingType={editingType}
         onCancel={() => setEditingType(null)}

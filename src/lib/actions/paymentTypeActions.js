@@ -56,4 +56,3 @@ export async function deletePaymentType(id) {
     return { success: false, error: "Cannot delete payment type if it is used in bookings." };
   }
 }
-

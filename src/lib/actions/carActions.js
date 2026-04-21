@@ -73,4 +73,3 @@ export async function deleteCar(id) {
     return { success: false, error: "Cannot delete car if it has existing bookings." };
   }
 }
-

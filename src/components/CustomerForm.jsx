@@ -5,29 +5,11 @@ import { Plus, Edit2, X, User, Phone, MapPin, CreditCard } from "lucide-react";
 
 export default function CustomerForm({ onSubmit, editingCustomer, onCancel, isLoading }) {
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    identityNumber: "",
+    name: editingCustomer?.name || "",
+    phone: editingCustomer?.phone || "",
+    address: editingCustomer?.address || "",
+    identityNumber: editingCustomer?.identityNumber || "",
   });
-
-  useEffect(() => {
-    if (editingCustomer) {
-      setFormData({
-        name: editingCustomer.name,
-        phone: editingCustomer.phone,
-        address: editingCustomer.address,
-        identityNumber: editingCustomer.identityNumber,
-      });
-    } else {
-      setFormData({
-        name: "",
-        phone: "",
-        address: "",
-        identityNumber: "",
-      });
-    }
-  }, [editingCustomer]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +30,7 @@ export default function CustomerForm({ onSubmit, editingCustomer, onCancel, isLo
         {editingCustomer ? <Edit2 size={20} /> : <Plus size={20} />}
         {editingCustomer ? "Edit Customer" : "Add New Customer"}
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-medium opacity-70 flex items-center gap-2">
@@ -121,14 +103,14 @@ export default function CustomerForm({ onSubmit, editingCustomer, onCancel, isLo
             <X size={18} /> Cancel
           </button>
         )}
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="btn-primary"
-        >
+        <button type="submit" disabled={isLoading} className="btn-primary">
           {isLoading ? (
             <span className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white" />
-          ) : editingCustomer ? "Update Customer" : "Add Customer"}
+          ) : editingCustomer ? (
+            "Update Customer"
+          ) : (
+            "Add Customer"
+          )}
         </button>
       </div>
     </form>

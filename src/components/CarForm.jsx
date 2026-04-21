@@ -5,38 +5,14 @@ import { Plus, Edit2, X, Car as CarIcon, Users, CreditCard, Hash } from "lucide-
 
 export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, brands }) {
   const [formData, setFormData] = useState({
-    brandId: "",
-    model: "",
-    seats: "5",
-    registrationNumber: "",
-    dailyRate: "",
-    status: "Available",
-    imageUrl: "",
+    brandId: editingCar?.brandId || brands[0]?.id || "",
+    model: editingCar?.model || "",
+    seats: (editingCar?.seats || 5).toString(),
+    registrationNumber: editingCar?.registrationNumber || "",
+    dailyRate: (editingCar?.dailyRate || "").toString(),
+    status: editingCar?.status || "Available",
+    imageUrl: editingCar?.imageUrl || "",
   });
-
-  useEffect(() => {
-    if (editingCar) {
-      setFormData({
-        brandId: editingCar.brandId,
-        model: editingCar.model,
-        seats: editingCar.seats.toString(),
-        registrationNumber: editingCar.registrationNumber,
-        dailyRate: editingCar.dailyRate.toString(),
-        status: editingCar.status,
-        imageUrl: editingCar.imageUrl || "",
-      });
-    } else {
-      setFormData({
-        brandId: brands[0]?.id || "",
-        model: "",
-        seats: "5",
-        registrationNumber: "",
-        dailyRate: "",
-        status: "Available",
-        imageUrl: "",
-      });
-    }
-  }, [editingCar, brands]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +30,7 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
         {editingCar ? <Edit2 size={20} /> : <Plus size={20} />}
         {editingCar ? `Edit ${editingCar.model}` : "Add New Car"}
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-medium opacity-70 flex items-center gap-2">
@@ -67,7 +43,9 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
             className="input-glass bg-transparent"
             required
           >
-            <option value="" disabled className="bg-slate-900">Select Brand</option>
+            <option value="" disabled className="bg-slate-900">
+              Select Brand
+            </option>
             {brands.map((brand) => (
               <option key={brand.id} value={brand.id} className="bg-slate-900">
                 {brand.name}
@@ -77,9 +55,7 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium opacity-70 flex items-center gap-2">
-            Model
-          </label>
+          <label className="text-sm font-medium opacity-70 flex items-center gap-2">Model</label>
           <input
             type="text"
             name="model"
@@ -137,9 +113,7 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium opacity-70 flex items-center gap-2">
-            Status
-          </label>
+          <label className="text-sm font-medium opacity-70 flex items-center gap-2">Status</label>
           <select
             name="status"
             value={formData.status}
@@ -147,9 +121,15 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
             className="input-glass bg-transparent"
             required
           >
-            <option value="Available" className="bg-slate-900 text-emerald-400">Available</option>
-            <option value="Maintenance" className="bg-slate-900 text-amber-400">Maintenance</option>
-            <option value="Rented" className="bg-slate-900 text-blue-400">Rented</option>
+            <option value="Available" className="bg-slate-900 text-emerald-400">
+              Available
+            </option>
+            <option value="Maintenance" className="bg-slate-900 text-amber-400">
+              Maintenance
+            </option>
+            <option value="Rented" className="bg-slate-900 text-blue-400">
+              Rented
+            </option>
           </select>
         </div>
       </div>
@@ -164,14 +144,14 @@ export default function CarForm({ onSubmit, editingCar, onCancel, isLoading, bra
             <X size={18} /> Cancel
           </button>
         )}
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="btn-primary"
-        >
+        <button type="submit" disabled={isLoading} className="btn-primary">
           {isLoading ? (
             <span className="animate-spin rounded-full h-4 w-4 border-2 border-white/30 border-t-white" />
-          ) : editingCar ? "Update Car" : "Add Car"}
+          ) : editingCar ? (
+            "Update Car"
+          ) : (
+            "Add Car"
+          )}
         </button>
       </div>
     </form>

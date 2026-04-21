@@ -13,7 +13,9 @@ export function useCustomers(initialCustomers = []) {
     setError(null);
     const result = await createCustomer(data);
     if (result.success) {
-      setCustomers((prev) => [...prev, result.customer].sort((a, b) => a.name.localeCompare(b.name)));
+      setCustomers((prev) =>
+        [...prev, result.customer].sort((a, b) => a.name.localeCompare(b.name)),
+      );
     } else {
       setError(result.error);
     }
@@ -27,7 +29,9 @@ export function useCustomers(initialCustomers = []) {
     const result = await updateCustomer(id, data);
     if (result.success) {
       setCustomers((prev) =>
-        prev.map((c) => (c.id === id ? result.customer : c)).sort((a, b) => a.name.localeCompare(b.name))
+        prev
+          .map((c) => (c.id === id ? result.customer : c))
+          .sort((a, b) => a.name.localeCompare(b.name)),
       );
     } else {
       setError(result.error);

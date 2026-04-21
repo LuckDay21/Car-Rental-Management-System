@@ -39,7 +39,9 @@ export default function CustomerPage({ initialCustomers = [] }) {
             <Users className="text-blue-500" size={32} />
             <div>
               <p className="text-2xl font-bold">{customers.length}</p>
-              <p className="text-xs opacity-60 uppercase tracking-wider font-bold">Total Registered</p>
+              <p className="text-xs opacity-60 uppercase tracking-wider font-bold">
+                Total Registered
+              </p>
             </div>
           </div>
         </div>
@@ -53,6 +55,7 @@ export default function CustomerPage({ initialCustomers = [] }) {
       )}
 
       <CustomerForm
+        key={editingCustomer?.id || "new"}
         onSubmit={handleFormSubmit}
         editingCustomer={editingCustomer}
         onCancel={() => setEditingCustomer(null)}
