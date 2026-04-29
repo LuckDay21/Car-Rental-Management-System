@@ -1,4 +1,4 @@
-import BookingPage from "@/pages/BookingPage";
+import BookingPage from "@/views/BookingPage";
 import { getBookings } from "@/lib/actions/bookingActions";
 import { getCustomers } from "@/lib/actions/customerActions";
 import { getCars } from "@/lib/actions/carActions";

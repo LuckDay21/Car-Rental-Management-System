@@ -1,4 +1,4 @@
-import CustomerPage from "@/pages/CustomerPage";
+import CustomerPage from "@/views/CustomerPage";
 import { getCustomers } from "@/lib/actions/customerActions";
 
 export const metadata = {

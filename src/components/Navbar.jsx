@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Car, LayoutDashboard, Database, ClipboardList, Users, MapPin } from "lucide-react";
+import {
+  Car,
+  LayoutDashboard,
+  Database,
+  ClipboardList,
+  Users,
+  MapPin,
+  CreditCard,
+} from "lucide-react";
 import { clsx } from "clsx";
 
 const navItems = [
@@ -12,6 +20,7 @@ const navItems = [
   { href: "/routes", label: "Routes", icon: MapPin },
   { href: "/bookings", label: "Bookings", icon: ClipboardList },
   { href: "/customers", label: "Customers", icon: Users },
+  { href: "/payment-types", label: "Payments", icon: CreditCard },
 ];
 
 export default function Navbar() {

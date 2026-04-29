@@ -1,4 +1,4 @@
-import CarPage from "@/pages/CarPage";
+import CarPage from "@/views/CarPage";
 import { getCars } from "@/lib/actions/carActions";
 import { getBrands } from "@/lib/actions/brandActions";
 

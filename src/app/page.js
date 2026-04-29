@@ -1,4 +1,4 @@
-import DashboardPage from "@/pages/DashboardPage";
+import DashboardPage from "@/views/DashboardPage";
 import { prisma } from "@/utils/prisma";
 import { getBookings } from "@/lib/actions/bookingActions";
 

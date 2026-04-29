@@ -1,4 +1,4 @@
-import BrandPage from "@/pages/BrandPage";
+import BrandPage from "@/views/BrandPage";
 import { getBrands } from "@/lib/actions/brandActions";
 
 export const metadata = {

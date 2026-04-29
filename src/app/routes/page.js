@@ -1,4 +1,4 @@
-import RoutePage from "@/pages/RoutePage";
+import RoutePage from "@/views/RoutePage";
 import { getRoutes } from "@/lib/actions/routeActions";
 
 export const metadata = {

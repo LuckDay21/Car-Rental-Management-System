@@ -1,4 +1,4 @@
-import PaymentTypePage from "@/pages/PaymentTypePage";
+import PaymentTypePage from "@/views/PaymentTypePage";
 import { getPaymentTypes } from "@/lib/actions/paymentTypeActions";
 
 export const metadata = {
